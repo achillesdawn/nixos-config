@@ -96,6 +96,7 @@
       rustup
       blender
       htop
+      virtualenv
     ];
   };
 
