@@ -122,10 +122,26 @@
     zellij
     go
     python3
-    rustup
+
+    gcc
+    llvm
+    llvmPackages.bintools
+
     rustc
+    cargo
     kitty
+    # vscode
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions; [
+        bbenoist.nix
+        rust-lang.rust-analyzer
+        usernamehw.errorlens
+      ];
+    })
   ];
+
+  environment.variables = with pkgs; {
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
