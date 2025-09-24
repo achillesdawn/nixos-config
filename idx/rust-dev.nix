@@ -10,7 +10,7 @@
     pkgs.cargo
     pkgs.rustfmt
     pkgs.clippy
-    pkgs.gcc
+    pkgs.stdenv.cc
     pkgs.openssl
     pkgs.pkg-config
       
@@ -23,15 +23,18 @@
   # Sets environment variables in the workspace
   env = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    CARGO_HOME = "~/.cargo/bin";
+    RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
   };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       # "vscodevim.vim"
       "google.gemini-cli-vscode-ide-companion"
-      "rust-anlyzer.rust-anlyzer"
-      "bungcip.better-toml"
-      "usernamehw.errorlens"
+      "rust-lang.rust-analyzer"
+      "tamasfe.even-better-toml"
+      "serayuzgur.crates"
+      "vadimcn.vscode-lldb"
     ];
     # Enable previews
     previews = {
@@ -56,7 +59,8 @@
         # Example: install JS dependencies from NPM
         # npm-install = "npm install";
         # Open editors for the following files by default, if they exist:
-        default.openFiles = [ ".idx/dev.nix" "README.md" ];
+        # default.openFiles = [ ".idx/dev.nix" "README.md" ];
+        default.openFiles = [ "supermkt/src/main.rs" ];
       };
       # Runs when the workspace is (re)started
       onStart = {
